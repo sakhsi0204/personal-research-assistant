@@ -51,6 +51,7 @@ Implemented a vector-based retrieval system using FAISS for efficient similarity
 
 - GitHub Repository Setup ✅
 - Module 4 Completed ✅
+- Module 5 Completed ✅
 - Testing Completed ✅
 
 ## Author
