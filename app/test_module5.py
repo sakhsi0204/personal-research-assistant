@@ -1,27 +1,22 @@
 from vector_manager import VectorManager
 
 chunks = [
-    "Artificial Intelligence is transforming healthcare.",
-    "Machine Learning is a subset of AI.",
-    "Deep Learning uses neural networks.",
-    "Python is widely used for AI development.",
-    "FAISS helps perform similarity search."
+    "Transformers are deep learning models used in NLP.",
+    "Attention mechanism helps models focus on important words.",
+    "BERT is a transformer-based language model.",
+    "GPT generates human-like text.",
+    "Deep learning uses neural networks."
 ]
 
-vm = VectorManager()
+vector_db = VectorManager()
 
-print("Creating embeddings...")
-vm.create_embeddings(chunks)
+vector_db.create_embeddings(chunks)
 
-print("Embeddings created successfully!")
+results = vector_db.search(
+    "What are transformers?"
+)
 
-query = "What is machine learning?"
+print("\nSEARCH RESULTS:\n")
 
-results = vm.search(query)
-
-print("\nSearch Results:\n")
-
-for i, result in enumerate(results, start=1):
-    print(f"Result {i}:")
-    print(result)
-    print()
+for r in results:
+    print(r)

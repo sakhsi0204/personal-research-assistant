@@ -1,71 +1,32 @@
-import faiss
-import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 class VectorManager:
 
     def __init__(self):
-        self.index = None
+        self.vectorizer = TfidfVectorizer()
         self.text_chunks = []
+        self.vectors = None
 
     def create_embeddings(self, chunks):
-
         self.text_chunks = chunks
-
-        embeddings = []
-
-        for chunk in chunks:
-
-            vector = np.zeros(128)
-
-            words = chunk.split()
-
-            for i, word in enumerate(words[:128]):
-                vector[i] = len(word)
-
-            embeddings.append(vector)
-
-        embeddings = np.array(
-            embeddings,
-            dtype=np.float32
-        )
-
-        dimension = embeddings.shape[1]
-
-        self.index = faiss.IndexFlatL2(
-            dimension
-        )
-
-        self.index.add(
-            embeddings
-        )
-
-        return len(chunks)
+        self.vectors = self.vectorizer.fit_transform(chunks)
 
     def search(self, query, top_k=3):
 
-        query_vector = np.zeros(
-            (1, 128),
-            dtype=np.float32
-        )
+        query_vector = self.vectorizer.transform([query])
 
-        words = query.split()
-
-        for i, word in enumerate(words[:128]):
-            query_vector[0][i] = len(word)
-
-        distances, indices = self.index.search(
+        similarities = cosine_similarity(
             query_vector,
-            top_k
-        )
+            self.vectors
+        )[0]
+
+        ranked = similarities.argsort()[::-1]
 
         results = []
 
-        for idx in indices[0]:
-
-            if idx < len(self.text_chunks):
-                results.append(
-                    self.text_chunks[idx]
-                )
+        for idx in ranked[:top_k]:
+            results.append(self.text_chunks[idx])
 
         return results
