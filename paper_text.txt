@@ -1,3 +1,5 @@
+
+===== PAGE 1 =====
 Provided proper attribution is provided, Google hereby grants permission to
 reproduce the tables and figures in this paper solely for use in journalistic or
 scholarly works.
@@ -54,6 +56,8 @@ our research.
 ‡Work performed while at Google Research.
 31st Conference on Neural Information Processing Systems (NIPS 2017), Long Beach, CA, USA.
 arXiv:1706.03762v7  [cs.CL]  2 Aug 2023
+
+===== PAGE 2 =====
 1
 Introduction
 Recurrent neural networks, long short-term memory [13] and gated recurrent [7] neural networks
@@ -107,6 +111,8 @@ of continuous representations z = (z1, ..., zn). Given z, the decoder then gener
 sequence (y1, ..., ym) of symbols one element at a time. At each step the model is auto-regressive
 [10], consuming the previously generated symbols as additional input when generating the next.
 2
+
+===== PAGE 3 =====
 Figure 1: The Transformer - model architecture.
 The Transformer follows this overall architecture using stacked self-attention and point-wise, fully
 connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1,
@@ -134,6 +140,8 @@ Attention
 An attention function can be described as mapping a query and a set of key-value pairs to an output,
 where the query, keys, values, and output are all vectors. The output is computed as a weighted sum
 3
+
+===== PAGE 4 =====
 Scaled Dot-Product Attention
 Multi-Head Attention
 Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several
@@ -177,6 +185,8 @@ queries, keys and values we then perform the attention function in parallel, yie
 variables with mean 0 and variance 1. Then their dot product, q · k = Pdk
 i=1 qiki, has mean 0 and variance dk.
 4
+
+===== PAGE 5 =====
 output values. These are concatenated and once again projected, resulting in the final values, as
 depicted in Figure 2.
 Multi-head attention allows the model to jointly attend to information from different representation
@@ -233,6 +243,8 @@ mation and softmax function to convert the decoder output to predicted next-toke
 our model, we share the same weight matrix between the two embedding layers and the pre-softmax
 linear transformation, similar to [30]. In the embedding layers, we multiply those weights by √dmodel.
 5
+
+===== PAGE 6 =====
 Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations
 for different layer types. n is the sequence length, d is the representation dimension, k is the kernel
 size of convolutions and r the size of the neighborhood in restricted self-attention.
@@ -297,6 +309,8 @@ As noted in Table 1, a self-attention layer connects all positions with a consta
 executed operations, whereas a recurrent layer requires O(n) sequential operations. In terms of
 computational complexity, self-attention layers are faster than recurrent layers when the sequence
 6
+
+===== PAGE 7 =====
 length n is smaller than the representation dimensionality d, which is most often the case with
 sentence representations used by state-of-the-art models in machine translations, such as word-piece
 [38] and byte-pair [31] representations. To improve computational performance for tasks involving
@@ -348,6 +362,8 @@ warmup_steps = 4000.
 Regularization
 We employ three types of regularization during training:
 7
+
+===== PAGE 8 =====
 Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the
 English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.
 Model
@@ -435,6 +451,8 @@ To evaluate the importance of different components of the Transformer, we varied
 in different ways, measuring the change in performance on English-to-German translation on the
 5We used values of 2.8, 3.7, 6.0 and 9.5 TFLOPS for K80, K40, M40 and P100, respectively.
 8
+
+===== PAGE 9 =====
 Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base
 model. All metrics are on the English-to-German translation development set, newstest2013. Listed
 perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to
@@ -584,6 +602,8 @@ We performed only a small number of experiments to select the dropout, both atte
 (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters
 remained unchanged from the English-to-German base translation model. During inference, we
 9
+
+===== PAGE 10 =====
 Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23
 of WSJ)
 Parser
@@ -660,6 +680,8 @@ machine translation architectures. CoRR, abs/1703.03906, 2017.
 [4] Jianpeng Cheng, Li Dong, and Mirella Lapata. Long short-term memory-networks for machine
 reading. arXiv preprint arXiv:1601.06733, 2016.
 10
+
+===== PAGE 11 =====
 [5] Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Fethi Bougares, Holger Schwenk,
 and Yoshua Bengio. Learning phrase representations using rnn encoder-decoder for statistical
 machine translation. CoRR, abs/1406.1078, 2014.
@@ -707,6 +729,8 @@ sequence to sequence learning. arXiv preprint arXiv:1511.06114, 2015.
 [24] Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective approaches to attention-
 based neural machine translation. arXiv preprint arXiv:1508.04025, 2015.
 11
+
+===== PAGE 12 =====
 [25] Mitchell P Marcus, Mary Ann Marcinkiewicz, and Beatrice Santorini. Building a large annotated
 corpus of english: The penn treebank. Computational linguistics, 19(2):313–330, 1993.
 [26] David McClosky, Eugene Charniak, and Mark Johnson. Effective self-training for parsing. In
@@ -750,6 +774,8 @@ fast-forward connections for neural machine translation. CoRR, abs/1606.04199, 2
 shift-reduce constituent parsing. In Proceedings of the 51st Annual Meeting of the ACL (Volume
 1: Long Papers), pages 434–443. ACL, August 2013.
 12
+
+===== PAGE 13 =====
 Attention Visualizations
 It
 is
@@ -822,6 +848,8 @@ encoder self-attention in layer 5 of 6. Many of the attention heads attend to a 
 the verb ‘making’, completing the phrase ‘making...more difficult’. Attentions here shown only for
 the word ‘making’. Different colors represent different heads. Best viewed in color.
 13
+
+===== PAGE 14 =====
 The
 Law
 will
@@ -934,6 +962,8 @@ Figure 4: Two attention heads, also in layer 5 of 6, apparently involved in anap
 Full attentions for head 5. Bottom: Isolated attentions from just the word ‘its’ for attention heads 5
 and 6. Note that the attentions are very sharp for this word.
 14
+
+===== PAGE 15 =====
 The
 Law
 will

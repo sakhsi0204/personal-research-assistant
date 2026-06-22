@@ -21,34 +21,51 @@ def download_pdf(pdf_url, filename):
     except Exception as e:
         print("Download Error:", e)
 
-
 def extract_text(pdf_path):
-    try:
-        doc = fitz.open(pdf_path)
 
-        text = ""
+    doc = fitz.open(pdf_path)
 
-        for page in doc:
-            text += page.get_text()
+    page_texts = {}
 
-        return text
+    for page_num in range(len(doc)):
 
-    except Exception as e:
-        print("Extraction Error:", e)
-        return ""
+        page = doc.load_page(page_num)
+
+        text = page.get_text()
+
+        page_texts[page_num + 1] = text
+
+    doc.close()
+
+    return page_texts
 
 
-def save_text(text, output_file):
-    with open(output_file, "w", encoding="utf-8") as file:
-        file.write(text)
+def save_text(page_texts, filename):
+
+    with open(filename, "w", encoding="utf-8") as file:
+
+        for page_num, text in page_texts.items():
+
+            file.write(f"\n===== PAGE {page_num} =====\n")
+
+            file.write(text)
 
     print("Text saved successfully")
 
 
-def get_pdf_stats(text):
+def get_pdf_stats(page_texts):
+
+    total_pages = len(page_texts)
+
+    total_words = 0
+
+    for text in page_texts.values():
+
+        total_words += len(text.split())
+
     return {
-        "word_count": len(text.split()),
-        "character_count": len(text)
+        "pages": total_pages,
+        "words": total_words
     }
 
 

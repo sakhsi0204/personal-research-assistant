@@ -1,9 +1,4 @@
-from document_handler import (
-    download_pdf,
-    extract_text,
-    save_text,
-    get_pdf_stats
-)
+from document_handler import *
 
 pdf_url = "https://arxiv.org/pdf/1706.03762.pdf"
 
@@ -12,17 +7,19 @@ pdf_path = download_pdf(
     "attention_is_all_you_need.pdf"
 )
 
-text = extract_text(pdf_path)
+page_texts = extract_text(pdf_path)
 
-print("\nTEXT PREVIEW:\n")
-print(text[:1000])
+print("\nFIRST PAGE PREVIEW:\n")
 
-stats = get_pdf_stats(text)
+print(page_texts[1][:1000])
 
-print("\nPDF STATISTICS:")
+stats = get_pdf_stats(page_texts)
+
+print("\nPDF STATISTICS:\n")
+
 print(stats)
 
 save_text(
-    text,
+    page_texts,
     "paper_text.txt"
 )
